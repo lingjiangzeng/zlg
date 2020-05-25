@@ -1,0 +1,219 @@
+.calldetail{
+	width:100%;
+	height:100%;
+	background:rgba(240, 240, 240,1);
+	display:flex;
+	flex-direction:column;
+	justify-content:flex-start;
+	align-items:center;
+	overflow:hidden;
+	position:absolute;
+	top:0px;
+	left:0px;
+	z-index:10;
+	.header{
+		width:calc(100% - 48px);
+		margin-top:24px;
+		height:64px;
+		background:rgba(251,251,253,1);
+		border-bottom:1px solid  rgba(229,229,229,1);
+		display:flex;
+		flex-direction:row;
+		justify-content:flex-start;
+		align-items:center;
+		border-top-left-radius:8px;
+		border-top-right-radius:8px;
+		.back{
+			height:24px;
+			cursor:pointer;
+			color:rgba(17,28,54,1);
+			border-right:1px solid rgba(219,222,229,0.8);
+			display:flex;
+			flex-direction:row;
+			justify-content:flex-start;
+			align-items:center;
+			i{
+				margin-left:24px;
+				font-size:14px;
+			}
+			span{
+				margin-left:8px;
+				margin-right:16px;
+				font-size:14px;
+			}
+		}
+		.serialnumber{
+			height:24px;
+			margin-left:16px;
+			display:flex;
+			flex-direction:row;
+			justify-content:flex-start;
+			align-items:center;
+			font-size:18px;
+			font-weight:500;
+			color:rgba(17,28,54,1);
+		}
+	}
+	.detailcontent{
+		width:calc(100% - 48px);
+		height:calc(100% - 112px);
+		background:rgba(255,255,255,1);
+		border-bottom-left-radius:8px;
+		border-bottom-right-radius:8px;
+		.rightcontentox{
+			height:100%;
+			width:100%;
+			background: rgba(255, 255, 255, 1);
+			display:flex;
+			flex-direction:column;
+			justify-content:flex-start;
+			align-items:center;
+			overflow-x:hidden;
+			overflow-y:auto;
+			border-radius:8px;
+			.callDetail{
+				margin-top:31px;
+				width:calc(100% - 64px);
+				border-bottom:1px solid rgba(240,240,240,1);
+				box-sizing:border-box;
+				padding:0px 0px 32px 0px;
+				.title{
+					width:100%;
+					line-height:14px;
+					span{
+						line-height:14px;
+						font-size:16px;
+						font-weight:bold;
+						color:rgba(2,21,44,1);
+					}
+				}
+				.msg{
+					width:100%;
+					display:flex;
+					flex-direction:row;
+					justify-content:flex-start;
+					align-items:flex-start;
+					flex-flow:row wrap;
+					.msgcontent{
+						margin-top:31px;
+						width:300px;
+						display:flex;
+						flex-direction:row;
+						justify-content:flex;
+						align-items:center;
+						height:15px;
+						img{
+							margin-left:8px;
+							width:40px;
+							height:40px;
+							border-radius:50%;
+						}
+						.title{
+							width:auto;
+							font-size:14px;
+							font-weight:bold;
+							color:rgba(2,21,44,1);
+						}
+						.text{
+							margin-left:8px;
+							width:auto;
+							font-size:14px;
+							color:rgba(163, 163, 165,1);
+						}
+					}
+					.audioify{
+						width:400px;
+						>audio{
+							margin-left:13px;
+							height:40px;
+							width:282px;
+							background:rgba(241, 243, 244,1);
+							border:1px solid rgba(229,229,229,1);
+							border-radius:4px;
+							outline:none;
+						}
+					}
+				}
+			}
+			.billorder{
+				width:calc(100% - 64px);
+				.title{
+					height:70px;
+					display:flex;
+					flex-direction:row;
+					justify-content:space-between;
+					align-items:center;
+					.text{
+						font-size:16px;
+						font-weight:bold;
+						color:rgba(2,21,44,1);
+					}
+					.buildbtn{
+						cursor:pointer;
+						width:88px;
+						height:40px;
+						min-width:88px;
+						min-height:40px;
+						background:rgba(24,128,255,1);
+						border-radius:4px;
+						display:flex;
+						flex-direction:row;
+						justify-content:center;
+						align-items:center;
+						span{
+							font-size:14px;
+							font-weight:500;
+							color:rgba(255,255,255,1);
+							
+						}
+					}
+				}
+				.table{
+					width:100%;
+					height:calc(100% - 90px);
+					border-top:1px solid rgba(240,240,240,1);
+				}
+				.empty{
+					width:100%;
+					height:280px;
+					display:flex;
+					flex-direction:column;
+					justify-content:flex-start;
+					align-items:center;
+					img{
+						width:230px;
+						height:230px;
+					}
+					span{
+						line-height:14px;
+						font-size:14px;
+						font-weight:500;
+						color:rgba(2,21,44,1);
+					}
+				}
+				
+			}
+		}
+		.rightcontentox::-webkit-scrollbar {
+			width:2px;
+			background-color:rgba(255, 255, 255, 1);
+			
+		}
+		.rightcontentox::-webkit-scrollbar-thumb {
+			border-radius: 2px;
+			background-color:rgba(168, 168, 168, 1);
+		}
+
+	}
+	/* 工单详情动画*/
+	.slide-workorderdetail-enter-active {
+		transition: all .3s cubic-bezier(.61,.13,.08,1.1) 0s;
+	}
+	.slide-workorderdetail-leave-active {
+		transition: all .3s cubic-bezier(.61,.13,.08,1.1) 0s;
+	}
+	.slide-workorderdetail-enter,
+	.slide-workorderdetail-leave-to {
+		 transform: translateX(100%);
+	}
+}

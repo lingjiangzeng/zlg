@@ -1,0 +1,383 @@
+.callenter{
+	width:100%;
+	height:100%;
+	background: rgba(240, 240, 240, 1);
+	display:flex;
+	flex-direction:row;
+	justify-content:flex-start;
+	align-items:center;
+	.leftcontentbox{
+		height:calc(100% - 48px);
+		width:424px;
+		margin-left:24px;
+		background: rgba(240, 240, 240, 1);
+		display:flex;
+		flex-direction:column;
+		justify-content:flex-start;
+		align-items:center;
+		border-radius:8px;
+		.callStatus{
+			width:100%;
+			height:164px;
+			background:rgba(255,255,255,1);
+			border-radius:8px;
+			display:flex;
+			flex-direction:row;
+			justify-content:center;
+			align-items:center;
+			.title{
+				font-size:24px;
+				font-weight:500;
+				color:rgba(150,159,170,1);
+				display:flex;
+				flex-direction:row;
+				justify-content:center;
+				align-items:center;
+				img{
+					margin-top:3px;
+					height:24px;
+					width:24px;
+				}
+			}
+		}
+		.callStatus1{
+			width:100%;
+			height:164px;
+			background:rgba(255,255,255,1);
+			border-radius:8px;
+			display:flex;
+			flex-direction:column;
+			justify-content:flex-start;
+			align-items:flex-start;
+			.callDuration{
+				margin-top:32px;
+				margin-left:31px;
+				line-height:16px;
+				display:flex;
+				flex-direction:row;
+				justify-content:flex;
+				align-items:center;
+				.title{
+					font-size:14px;
+					font-weight:500;
+					color:rgba(0,177,25,1);
+				}
+				.time{
+					line-height:16px;
+					font-size:16px;
+					font-weight:500;
+					color:rgba(2,21,44,1);
+				}
+			}
+			.userInfo{
+				display:flex;
+				flex-direction:row;
+				justify-content:flex-start;
+				align-items:center;
+				margin-left:34px;
+				margin-top:30px;
+					img{
+						width:51px;
+						height:56px;
+					}
+					.name_callNo{
+						margin-left:17px;
+						height:56px;
+						display:flex;
+						flex-direction:column;
+						justify-content:flex-start;
+						align-items:flex-start;
+						.name{
+							cursor:pointer;
+							margin-top:7px;
+							line-height:14px;
+							font-size:14px;
+							font-weight:500;
+							color:rgba(2,21,44,1);
+							display:block;
+							width:80%;
+							overflow:hidden;
+							text-overflow:ellipsis;
+							white-space: nowrap;
+						}
+						.phonenumber{
+							margin-top:8px;
+							line-height:20px;
+							font-size:20px;
+							font-weight:500;
+							color:rgba(2,21,44,1);
+						}
+					}
+				
+			}
+		}
+		.calllist{
+			margin-top:16px;
+			width:100%;
+			height:calc(100% - 180px);
+			background:rgba(255,255,255,1);
+			border-radius:8px;
+			overflow:hidden;
+			.title{
+				width:100%;
+				height:54px;
+				display:flex;
+				flex-direction:row;
+				justify-content:flex-start;
+				align-items:center;
+				border-radius:8px;
+				.text{
+					margin-left:30px;
+					font-size:14px;
+					font-weight:500;
+					color:rgba(150,159,170,1);	
+				}
+				.number{
+					font-size:14px;
+					font-weight:500;
+					color:rgba(24,128,255,1);
+				}
+			}
+			.list{
+				width:100%;
+				height:calc(100% - 54px);
+				overflow-x:hidden;
+				overflow-Y:auto;
+				.usermsg{
+					width:100%;
+					height:64px;
+					display:flex;
+					flex-direction:row;
+					justify-content:flex-start;
+					align-items:center;
+					cursor:pointer;
+					.msg{
+						margin-left:32px;
+						display:flex;
+						flex-direction:row;
+						justify-content:flex-start;
+						align-items:center;
+						width:70%;
+						height:40px;
+						img{
+							width:40px;
+							height:40px;
+						}
+						.name_callNo{
+							margin-left:15px;
+							height:40px;
+							width:70%;
+							display:flex;
+							flex-direction:column;
+							justify-content:space-between;
+							align-items:flex-start;
+							.name{
+								display:block;
+								width:80%;
+								overflow:hidden;
+								text-overflow:ellipsis;
+								white-space: nowrap;
+								line-height:14px;
+								font-size:14px;
+								font-weight:500;
+								color:rgba(150,159,170,1);
+							}
+							.phonenumber{
+								line-height:16px;
+								font-size:16px;
+								font-weight:500;
+								color:rgba(51,51,51,1);
+							}
+						}
+					}
+					.times{
+						margin-left:32px;
+						font-size:14px;
+						font-weight:500;
+						color:rgba(150,159,170,1);
+					}
+				}
+				.usermsgactive{
+					background:rgba(245,245,245,1);
+				}
+				.usermsg:hover{
+					background:rgba(245,245,245,1);
+				}
+			}
+			.list::-webkit-scrollbar {
+				width:2px;
+				background-color:rgba(255, 255, 255, 1);
+				
+			}
+			
+			.list::-webkit-scrollbar-thumb {
+				border-radius: 2px;
+				background-color:rgba(168, 168, 168, 1);
+			}
+		}
+		
+	}
+	.rightcontentox{
+		margin-left:16px;
+		height:calc(100% - 48px);
+		width:calc(100% - 488px);
+		background: rgba(255, 255, 255, 1);
+		display:flex;
+		flex-direction:column;
+		justify-content:flex-start;
+		align-items:center;
+		overflow-x:hidden;
+		overflow-y:auto;
+		border-radius:8px;
+		.callDetail{
+			margin-top:31px;
+			width:calc(100% - 64px);
+			border-bottom:1px solid rgba(240,240,240,1);
+			box-sizing:border-box;
+			padding:0px 0px 32px 0px;
+			.title{
+				width:100%;
+				line-height:14px;
+				span{
+					line-height:14px;
+					font-size:16px;
+					font-weight:bold;
+					color:rgba(2,21,44,1);
+					
+				}
+			}
+			.msg{
+				width:100%;
+				display:flex;
+				flex-direction:row;
+				justify-content:flex-start;
+				align-items:flex-start;
+				flex-flow:row wrap;
+				.msgcontent{
+					margin-left:35px;
+					margin-top:31px;
+					width:250px;
+					display:flex;
+					flex-direction:row;
+					justify-content:flex;
+					align-items:center;
+					height:15px;
+					cursor:pointer;
+					img{
+						margin-left:8px;
+						width:40px;
+						height:40px;
+						border-radius:50%;
+					}
+					.title{
+						width:auto;
+						font-size:14px;
+						font-weight:bold;
+						color:rgba(2,21,44,1);
+						white-space: nowrap;
+					}
+					.text{
+						display:block;
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
+						margin-left:8px;
+						width:auto;
+						font-size:14px;
+						color:rgba(163, 163, 165,1);
+					}
+				}
+				.audioify{
+					width:400px;
+					>audio{
+						margin-left:13px;
+						height:40px;
+						width:282px;
+						background:rgba(241, 243, 244,1);
+						border:1px solid rgba(229,229,229,1);
+						border-radius:4px;
+					}
+				}
+			}
+		}
+		.billorder{
+			width:calc(100% - 64px);
+			margin-bottom:20px;
+			.title{
+				height:70px;
+				display:flex;
+				flex-direction:row;
+				justify-content:space-between;
+				align-items:center;
+				.text{
+					font-size:16px;
+					font-weight:bold;
+					color:rgba(2,21,44,1);
+				}
+				.buildbtn{
+					cursor:pointer;
+					width:88px;
+					height:40px;
+					min-width:88px;
+					min-height:40px;
+					background:rgba(24,128,255,1);
+					border-radius:4px;
+					display:flex;
+					flex-direction:row;
+					justify-content:center;
+					align-items:center;
+					span{
+						font-size:14px;
+						font-weight:500;
+						color:rgba(255,255,255,1);
+						
+					}
+				}
+			}
+			.table{
+				width:100%;
+				height:calc(100% - 90px);
+				border-top:1px solid rgba(240,240,240,1);
+			}
+			.empty{
+				width:100%;
+				height:280px;
+				display:flex;
+				flex-direction:column;
+				justify-content:flex-start;
+				align-items:center;
+				img{
+					width:230px;
+					height:230px;
+				}
+				span{
+					line-height:14px;
+					font-size:14px;
+					font-weight:500;
+					color:rgba(2,21,44,1);
+				}
+			}
+			
+		}
+	}
+	.rightcontentox::-webkit-scrollbar {
+		width:2px;
+		background-color:rgba(255, 255, 255, 1);
+		
+	}
+	.rightcontentox::-webkit-scrollbar-thumb {
+		border-radius: 2px;
+		background-color:rgba(168, 168, 168, 1);
+	}
+	/* 工单详情动画*/
+	.slide-workorderdetail-enter-active {
+		transition: all .3s cubic-bezier(.61,.13,.08,1.1) 0s;
+	}
+	.slide-workorderdetail-leave-active {
+		transition: all .3s cubic-bezier(.61,.13,.08,1.1) 0s;
+	}
+	.slide-workorderdetail-enter,
+	.slide-workorderdetail-leave-to {
+		 transform: translateX(100%);
+	}
+}

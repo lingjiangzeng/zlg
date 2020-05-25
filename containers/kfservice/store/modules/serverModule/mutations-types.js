@@ -1,0 +1,28 @@
+// new point
+
+
+export const SET_SOMEOBJ = 'SET_SOMEOBJ';
+
+export const SETZUINNEWS  = 'SETZUINNEWS';
+
+export const SET_WEBSOCKITSENDMSF  = 'SET_WEBSOCKITSENDMSF';
+
+export const SETUSERINFO  = 'SETUSERINFO';
+
+export const SETBUSINESSTYPE  = 'SETBUSINESSTYPE';
+
+export const SETPATH  = 'SETPATH';
+
+export const RESTATUS  = 'RESTATUS';
+
+export const SETCALLTIME  = 'SETCALLTIME';
+
+export const COSLESETCALLTIME  = 'COSLESETCALLTIME';
+
+export const SETWINDOWSIZE  = 'SETWINDOWSIZE';
+
+export const SETLOAD  = 'SETLOAD';
+
+export const SETOPENSUERCHART  = 'SETOPENSUERCHART';
+
+

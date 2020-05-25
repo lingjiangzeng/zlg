@@ -1,0 +1,260 @@
+.Mobilechat{
+	width:100vw;
+	height:100vh;
+	position:relative;
+	.chartheard{
+		width:100%;
+		height:48px;
+		display:flex;
+		flex-direction:row;
+		justify-content:space-between;
+		align-items:center;
+		position:relative;
+		background:rgba(255,255,255,1);
+		box-shadow:0px -1px 0px 0px rgba(229,229,229,1);
+		.username{
+			width:100%;
+			height:100%;
+			display:flex;
+			flex-direction:row;
+			justify-content:center; 
+			align-items:center;
+			font-size:16px;
+			color:rgba(51,51,51,1);
+			span{
+				display:block;
+				overflow:hidden;
+				text-overflow:ellipsis;
+				white-space: nowrap;
+				width:40%;
+				text-align:center;
+			}
+			
+		}
+		.endbtn{
+			position:absolute;
+			width:20%;
+			height:100%;
+			right:0px;
+			display:flex;
+			flex-direction:row;
+			justify-content:center;
+			align-items:center;
+			font-size:14px;
+			color:rgba(24,128,255,1);
+		}
+	}
+	.chartcontent{
+		width:100%;
+		height:calc(100% - 100px);
+		overflow-y:auto;
+		overflow-x:hidden;
+		box-sizing:border-box;
+		padding-bottom:20px;
+		background:rgba(239, 236, 240,1);
+		.pullloadingchart{
+			position:fixed;
+			top:48px;
+			left:0px;
+			height:40px;
+			width:100%;
+			display:flex;
+			flex-direction:row;
+			justify-content:center;
+			align-items:center;
+		}
+		.chartList{
+			width:100%;
+			height:auto;
+		.usercontent{
+			width:100%;
+			height:auto;
+			margin-top:12px;
+			.msgtime{
+				width:100%;
+				display:flex;
+				flex-direction:row;
+				justify-content:center;
+				align-items:center;
+				font-size:12px;
+				
+				color:rgba(153,153,153,1);
+			}
+			.hearder_content{
+				margin-top:10px;
+				width:100%;
+				height:auto;
+				display:flex;
+				flex-direction:row;
+				flex-direction:center;
+				justify-content:flex-start;
+				.hearder{
+					margin-left:12px;
+					width:39px;
+					height:39px;
+					border-radius:50%;
+					img{
+						width:39px;
+						height:39px;
+						border-radius:50%;
+					}
+				}
+				.msg{
+					margin-left:10px;
+					max-width:70%;
+					background:rgba(24,128,255,1);
+					border-radius:4px 4px 4px 0px;
+					font-size:15px;
+					
+					color:rgba(255,255,255,1);
+					display: flex;
+					flex-direction: row;
+					justify-content: flex-start;
+					word-break: break-all;
+					white-space: pre-wrap;
+					flex-wrap: wrap;
+					box-sizing:border-box;
+					padding:10px 10px 10px 10px;
+					.isLeave{
+						border:1px solid red;
+					}
+				}
+				.msgpicture{
+					margin-left:40px;
+					min-width:10%;
+					min-height:15%;
+					max-width:30%;
+					max-height:40%;
+					zoom:0.25;
+					img{
+						width:100%;
+						height:100%;
+					}
+				}
+			}
+		}
+		}
+		.chartList{
+			width:100%;
+			height:auto;
+		.kefucontent{
+			width:100%;
+			height:auto;
+			margin-top:12px;
+			.msgtime{
+				width:100%;
+				display:flex;
+				flex-direction:row;
+				justify-content:center;
+				align-items:center;
+				font-size:12px;
+				color:rgba(153,153,153,1);
+			}
+			.hearder_content{
+				margin-top:10px;
+				width:100%;
+				height:auto;
+				display:flex;
+				flex-direction:row-reverse;
+				flex-direction:center;
+				justify-content:flex-start;
+				.hearder{
+					margin-right:12px;
+					width:39px;
+					height:39px;
+					border-radius:50%;
+					img{
+						width:39px;
+						height:39px;
+						border-radius:50%;
+					}
+				}
+				.msg{
+					margin-right:10px;
+					max-width:70%;
+					background:rgba(255,255,255,1);
+					border-radius:4px 0px 4px 4px;
+					font-size:15px;
+					
+					color:rgba(50,50,50,1);
+					display: flex;
+					flex-direction: row;
+					justify-content: flex-start;
+					word-break: break-all;
+					white-space: pre-wrap;
+					flex-wrap: wrap;
+					box-sizing:border-box;
+					padding:10px 10px 10px 10px;
+				}
+				.msgpicture{
+					margin-right:40px;
+					min-width:10%;
+					min-height:15%;
+					max-width:30%;
+					max-height:40%;
+					zoom:0.25;
+					img{
+						width:100%;
+						height:100%;
+					}
+				}
+			}
+		}
+		}
+	}
+	.chartinput{
+		width:100%;
+		height:52px;
+		background:rgba(255,255,255,1);
+		box-shadow:0px 1px 0px 0px rgba(229,229,229,1);
+		display:flex;
+		flex-direction:row;
+		justify-content:flex-start;
+		align-items:center;
+		position:relative;
+		.pictureicon{
+			width:15%;
+			height:100%;
+			display:flex;
+			flex-direction:row;
+			justify-content:center;
+			align-items:center;
+		}
+		.msginput{
+			width:65%;
+		}
+		.sendbtn {
+			margin-left:5px;
+		}
+		.loading{
+			width:100%;
+			height:100%;
+			position:absolute;
+			top:0px;
+			left:0px;
+			display:flex;
+			flex-direction:column;
+			justify-content:center;
+			align-items:center;
+			background:rgba(255,255,255,0.3);
+		}
+	}
+	.showlinmsg{
+		display:flex;
+		flex-direction:row;
+		justify-content:center;
+		align-items:center;
+	}
+	.loadingchart{
+		position:absolute;
+		top:0px;
+		left:0px;
+		width:100%;
+		height:100%;
+		background:rgba(50,50,50,0.5);
+		display:flex;
+		flex-direction:column;
+		justify-content:center;
+		align-items:center;
+	}
+}
