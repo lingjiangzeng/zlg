@@ -5,7 +5,6 @@
   "author": "singo <singowu@sina.cn>",
   "private": true,
   "scripts": {
-    "server": "node ./server.js",
     "startkfservice": "webpack-dev-server --inline --progress  --config  ./containers/kfservice/build/webpack.dev.conf.js",
     "buildkfservice": "node ./containers/kfservice/build/build.js"
   },
