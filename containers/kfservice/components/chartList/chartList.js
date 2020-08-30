@@ -51,9 +51,11 @@ export default {
 			SETLOAD: 'SETLOAD',
 			SETOPENSUERCHART: 'SETOPENSUERCHART',
 		}),
+		//组件初始化方法
 		init: function() {
 			this.getchartlsitdata();
 			let _that = this;
+			//监听DOM中的点击事件
 			$('div').each(function() {
 				$(this).click(function() {
 					if (_that.visible) {
@@ -64,14 +66,17 @@ export default {
 				})
 			})
 		},
+		//选择聊天会话方法
 		choiceChart(index) {
 			let No = index.split('-');
 			imServerStore.dispatch('changechartList', index);
 			this.set_someObj(imServerStore.state.chartList[No[0]].list[No[2]]);
 		},
+		//表情解析方法
 		analysis: function(text) {
 			return publicmethod.expression(text, this);
 		},
+		//聊天会话数据回显处理
 		getchartlsitdata: function() {
 			this.SETLOAD(true);
 			let isLeave;
@@ -88,11 +93,9 @@ export default {
 				if (res.status == 10000) {
 					res.data.forEach(function(value, index) {
 						value.sendTime = publicmethod.chartlsithandle(value.sendTime);
-						
 						/*消息数量 */
 						value.messageaccount = 0;
-						
-						
+						//未读消息回显处理
 						if (value.timer != 0) {
 							let handletime = parseInt(value.timer / 60);
 							let handletimes = parseInt(value.timer % 60);
@@ -114,24 +117,24 @@ export default {
 					imServerStore.dispatch('chartList', _that.chartListexample);
 					imServerStore.dispatch('startcounting');
 					this.$nextTick(() => {
-							this.SETLOAD(false);
-							if (this.openuserchart != null) {
-								let index = imServerStore.getters.getchartList(this.openuserchart);
-								if (index != false) {
-									let No = index.split('-');
-									imServerStore.dispatch('changechartList', index);
-									this.set_someObj(imServerStore.state.chartList[No[0]].list[No[2]]);
-								}else{
-									this.set_someObj(null);
-								}
+						this.SETLOAD(false);
+						if (this.openuserchart != null) {
+							let index = imServerStore.getters.getchartList(this.openuserchart);
+							if (index != false) {
+								let No = index.split('-');
+								imServerStore.dispatch('changechartList', index);
+								this.set_someObj(imServerStore.state.chartList[No[0]].list[No[2]]);
+							} else {
+								this.set_someObj(null);
 							}
+						}
 					});
 
 				} else {
 					this.SETLOAD(false);
-					if(res.status == 30000){
+					if (res.status == 30000) {
 						this.$message.error(res.message);
-					}else{
+					} else {
 						this.$message.error('未能接收到规定的Josn返回格式!');
 					}
 				}
@@ -159,15 +162,16 @@ export default {
 						this.userlistmsg = '没有您查询的客户!';
 					}
 				} else {
-					if(res.status == 30000){
+					if (res.status == 30000) {
 						this.$message.error(res.message);
-					}else{
+					} else {
 						this.$message.error('未能接收到规定的Josn返回格式!');
 					}
 					this.userlistmsg = '查询客户信息失败,请重试!';
 				}
 			})
 		},
+		//选中收索到的客户
 		handleSelect(item) {
 			this.selectvlaue = '';
 			this.selecticon = false;
@@ -190,6 +194,7 @@ export default {
 				imServerStore.dispatch('changechartList', ifhaslsit);
 			}
 		},
+		//开启/关闭搜索图标
 		selectchange: function() {
 			if (this.selectvlaue == '') {
 				this.selecticon = false;
@@ -200,6 +205,7 @@ export default {
 		},
 		/* -搜索客户- */
 	},
+	//监听 openuserchart 数据的变化 打开聊天信息框 
 	watch: {
 		openuserchart: function(news, olds) {
 			if (news != olds && news != null) {
@@ -208,7 +214,7 @@ export default {
 					let No = index.split('-');
 					imServerStore.dispatch('changechartList', index);
 					this.set_someObj(imServerStore.state.chartList[No[0]].list[No[2]]);
-				}else{
+				} else {
 					this.set_someObj(null);
 				}
 			}

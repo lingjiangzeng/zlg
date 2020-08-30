@@ -1,12 +1,8 @@
 <template>
 	<div class="login">
-		<!-- 定不logo -->
-		<div class="topLogo">
-			<img src="../../assets/loginLogo.png" alt="">
-		</div>
 		<!-- form表单 -->
 		<form class="form" v-loading="loading!=''" :element-loading-text="loading" element-loading-background="rgba(255, 255, 255, 0.3)" >
-			<div class="title"><span>登录</span></div>
+			<div class="title"><span class="logo">Zlg</span><span>登录</span></div>
 			<input placeholder="请输入账号" v-model="form.name" class="name"></input>
 			<input placeholder="请输入密码" v-model="form.password" type="password" class="password" autocomplete></input>
 			<div class="roleOfScreening" v-on:mousemove="mousemovefun()" v-on:mouseleave="mouseleavefun()">
@@ -24,10 +20,6 @@
 			</div>
 			<el-button type="primary" @click="onSubmit" class="onSubmit">登录</el-button>
 		</form>
-		<!-- 底部loggo -->
-		<div class="bottomLogo">
-			<img src="../../assets/bottomLogo.png" alt="">
-		</div>
 	</div>
 </template>
 <script>

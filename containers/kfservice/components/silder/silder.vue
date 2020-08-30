@@ -1,6 +1,6 @@
 <template>
 	<div class="silder">
-		<div class="headerLogo"><img src="../../assets/logo.png" alt=""></div>
+		<div class="headerLogo"><span>z l g</span></div>
 		<el-menu :default-active="paths" class="el-menu-vertical-demo" text-color="#FFFFFF" background-color="#02152A" active-text-color="rgba(255,255,255,1)"  @select="choiceMeun" :unique-opened="true" >
 			<el-submenu :index="item.index" v-for="item in meunListData" :key="item.index" v-if="item.display">
 				<template slot="title">

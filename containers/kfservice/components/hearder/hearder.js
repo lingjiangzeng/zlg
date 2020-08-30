@@ -1,6 +1,13 @@
-import {mapGetters,mapMutations} from 'vuex'
-import {imServerStore} from '../../store/imServerStore.js'
-import {publicmethod} from '../../utils/publicmethod.js'
+import {
+	mapGetters,
+	mapMutations
+} from 'vuex'
+import {
+	imServerStore
+} from '../../store/imServerStore.js'
+import {
+	publicmethod
+} from '../../utils/publicmethod.js'
 export default {
 	name: "hearder",
 	data() {
@@ -9,21 +16,21 @@ export default {
 				value: 1,
 				label: '在线',
 				borderTop: "none",
-				active:true,
+				active: true,
 			}, {
 				value: 2,
 				label: '离开',
 				borderTop: "none",
-				active:false,
+				active: false,
 			}, {
 				value: 0,
 				label: '下线',
 				borderTop: "1px solid #E5E5E5",
-				active:false,
+				active: false,
 			}, ],
-			onlinevisible:false,
-			onlinestatus:null,
-			usermsg:{},
+			onlinevisible: false,
+			onlinestatus: null,
+			usermsg: {},
 			busselect: [],
 			busstr: '',
 			busVisible: false,
@@ -31,43 +38,46 @@ export default {
 		}
 	},
 	created() {
-		
+
 	},
 	mounted() {
 		publicmethod.backlogin(this) ? this.init() : null;
 	},
 	computed: {
-		...mapGetters('serverModule', ['someObj', 'zuixinnews','userInfo','businesstype','callwindow','path'])
+		...mapGetters('serverModule', ['someObj', 'zuixinnews', 'userInfo', 'businesstype', 'callwindow', 'path'])
 	},
 	methods: {
 		...mapMutations('serverModule', {
 			SETZUINNEWS: 'SETZUINNEWS',
 			set_someObj: 'SET_SOMEOBJ',
 			SETUSERINFO: 'SETUSERINFO',
-			SETBUSINESSTYPE:'SETBUSINESSTYPE',
-			RESTATUS:'RESTATUS',
-			SETLOAD:'SETLOAD',
+			SETBUSINESSTYPE: 'SETBUSINESSTYPE',
+			RESTATUS: 'RESTATUS',
+			SETLOAD: 'SETLOAD',
 		}),
-		init:function(){
+		//初始化方法
+		init: function() {
 			this.showbuss();
 			this.showusermsg();
-			let _that=this;
-			$('div').each(function(){
-				$(this).click(function(){
-					if(_that.onlinevisible){
-						_that.onlinevisible=false;
+			let _that = this;
+			$('div').each(function() {
+				$(this).click(function() {
+					if (_that.onlinevisible) {
+						_that.onlinevisible = false;
 					}
 				})
 			})
 		},
-		onlinevisiblefun:function(){
-			if(this.onlinevisible){
-				this.onlinevisible=false;
-			}else{
-				this.onlinevisible=true;
+		//在线状态下拉
+		onlinevisiblefun: function() {
+			if (this.onlinevisible) {
+				this.onlinevisible = false;
+			} else {
+				this.onlinevisible = true;
 			}
 		},
-		changestats: function(vlaue, label,index) {
+		/* 修改在在线状态方法 */
+		changestats: function(vlaue, label, index) {
 			this.$confirm('确定要更改登录状态为  "' + label + '"', '提示', {
 				confirmButtonText: '确定',
 				cancelButtonText: '取消',
@@ -76,32 +86,34 @@ export default {
 				this.SETLOAD(true);
 				this.$api.server.changeonlinestatus(vlaue).then(res => {
 					if (res.status == 10000) {
-						this.stutasselect.forEach((value,index)=>{
-							value.active=false;
+						this.stutasselect.forEach((value, index) => {
+							value.active = false;
 						})
-						this.stutasselect[index].active=true;
+						this.stutasselect[index].active = true;
 						if (vlaue == 0) {
-							 this.$parent.closewebsockit();
+							this.$parent.closewebsockit();
 							imServerStore.dispatch('resetstate');
-							 this.RESTATUS();
+							this.RESTATUS();
 							sessionStorage.clear();
 							this.SETLOAD(false);
-							this.$router.replace({name:'login'});
-							
+							this.$router.replace({
+								name: 'login'
+							});
+
 						} else {
 							this.SETLOAD(false);
-							this.onlinestatus=vlaue;
-							this.usermsg.onlinestatus=vlaue;
+							this.onlinestatus = vlaue;
+							this.usermsg.onlinestatus = vlaue;
 							this.SETUSERINFO(this.usermsg);
 							this.$message.success('已经成功修改登录状态');
 						}
-						
+
 					} else {
 						this.SETLOAD(false);
 						this.showusermsg();
-						if(res.status == 30000){
+						if (res.status == 30000) {
 							this.$message.error(res.message);
-						}else{
+						} else {
 							this.$message.error('未能接收到规定的Josn返回格式!');
 						}
 					}
@@ -110,9 +122,11 @@ export default {
 				this.showusermsg();
 			});
 		},
+		/* 表情解析，用于消息通知弹窗的表情解析 */
 		analysis: function(text) {
 			return publicmethod.expression(text);
 		},
+		//打开业务更改弹窗
 		handleClose: function() {
 			this.busVisible = false;
 			this.showbuss();
@@ -126,6 +140,7 @@ export default {
 				this.busNnmber++;
 			}
 		},
+		//提交已经更改的业务
 		submitbus: function() {
 			if (this.loading == true) {
 				return;
@@ -138,48 +153,50 @@ export default {
 				}
 			})
 			busstr = busarray.join(',');
-			this.busVisible =false;
+			this.busVisible = false;
 			this.SETLOAD(true);
 			this.$api.server.updateAdminBusinessInfo(busstr).then(res => {
 				if (res.status == 10000) {
 					this.busVisible = false;
-					 this.SETBUSINESSTYPE(JSON.parse(JSON.stringify(this.busselect)));
+					this.SETBUSINESSTYPE(JSON.parse(JSON.stringify(this.busselect)));
 					this.$message.success('修改业务成功');
 					this.SETLOAD(false);
 				} else {
 					this.showbuss();
 					this.SETLOAD(false);
-					if(res.status == 30000){
+					if (res.status == 30000) {
 						this.$message.error(res.message);
-					}else{
+					} else {
 						this.$message.error('未能接收到规定的Josn返回格式!');
 					}
 				}
 			})
 		},
-		showbuss:function(){
+		//回显已经选中的业务类型
+		showbuss: function() {
 			var _that = this;
-			_that.busNnmber=0;
-			this.busselect=JSON.parse(JSON.stringify(this.businesstype));
+			_that.busNnmber = 0;
+			this.busselect = JSON.parse(JSON.stringify(this.businesstype));
 			this.busselect.forEach(function(value, index) {
 				if (value.checked == true) {
 					_that.busNnmber++;
 				}
 			})
 		},
-		showusermsg:function(){
+		showusermsg: function() {
 			this.usermsg = JSON.parse(JSON.stringify(this.userInfo));
 			this.onlinestatus = this.usermsg.onlinestatus;
-			this.stutasselect.forEach((value,index)=>{
-				if(this.onlinestatus == value.value){
-					value.active=true;
-				}else{
-					value.active=false;
+			this.stutasselect.forEach((value, index) => {
+				if (this.onlinestatus == value.value) {
+					value.active = true;
+				} else {
+					value.active = false;
 				}
 			})
 		}
 	},
 	watch: {
+		//监听websockit 推送的消息进行消息通知
 		zuixinnews: function(news, olds) {
 			if (news != null) {
 				if (news.wsType == 1 || news.wsType == 2) {
@@ -196,7 +213,7 @@ export default {
 								news.msg + '<span>'
 						});
 					}
-				} else if(news.wsType == 3){
+				} else if (news.wsType == 3) {
 					if (news.senderType != 2) {
 						if (this.someObj != null) {
 							if (news.userId != this.someObj.userId || this.path != 'chart') {

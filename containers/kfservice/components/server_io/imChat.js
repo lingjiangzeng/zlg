@@ -15,7 +15,7 @@ export default {
 		commonChat: commonChat,
 		chartDetail: chartDetail
 	},
-	name:'imChat',
+	name: 'imChat',
 	data() {
 		return {
 			Listdata: {},
@@ -43,13 +43,14 @@ export default {
 	},
 	created() {},
 	computed: {
-		...mapGetters('serverModule', ['someObj','windowsize'])
+		...mapGetters('serverModule', ['someObj', 'windowsize'])
 	},
 	watch: {},
 	methods: {
 		...mapMutations('serverModule', {
-			SETLOAD:'SETLOAD',
+			SETLOAD: 'SETLOAD',
 		}),
+		/* 结束聊天会话窗口 */
 		EndServe(userId) {
 			var _that = this;
 			this.$confirm('确定结束服务?', '提示', {
@@ -60,21 +61,22 @@ export default {
 				this.SETLOAD(true);
 				_that.$api.server.endoftheservice(this.Listdata.userId).then(res => {
 					if (res.status == 10000) {
-						this.$nextTick(()=>{
+						this.$nextTick(() => {
 							this.SETLOAD(false);
 						})
 						_that.$message.success(res.message);
 					} else {
 						this.SETLOAD(false);
-						if(res.status == 30000){
+						if (res.status == 30000) {
 							this.$message.error(res.message);
-						}else{
+						} else {
 							this.$message.error('未能接收到规定的Josn返回格式!');
 						}
 					}
 				})
 			}).catch(() => {});
 		},
+		//显示/隐藏服务记录列表
 		showserverList: function() {
 			if (this.serverListStyle == false) {
 				this.serverListStyle = true;
@@ -83,6 +85,7 @@ export default {
 				this.serverListStyle = false;
 			}
 		},
+		// 查询用信息方法
 		changuserinfo: function(obj) {
 			if (obj != null) {
 				this.Listdata = obj;
@@ -90,11 +93,11 @@ export default {
 					if (res.status == 10000) {
 						this.userMsg = res.data;
 						this.$refs.commonchat.getchartdata();
-					}else{
+					} else {
 						this.$refs.commonchat.getchartdata();
-						if(res.status == 30000){
+						if (res.status == 30000) {
 							this.$message.error(res.message);
-						}else{
+						} else {
 							this.$message.error('未能接收到规定的Josn返回格式!');
 						}
 					}
@@ -102,6 +105,7 @@ export default {
 			}
 			this.initializestatus();
 		},
+		//将聊天转交人信息
 		changeServer() {
 			this.passTolistloading = true,
 				this.passtodata = [];
@@ -118,9 +122,9 @@ export default {
 						this.passTolistloading = false;
 					} else {
 						this.passTolistloading = false;
-						if(res.status == 30000){
+						if (res.status == 30000) {
 							this.$message.error(res.message);
-						}else{
+						} else {
 							this.$message.error('未能接收到规定的Josn返回格式!');
 						}
 					}
@@ -129,6 +133,7 @@ export default {
 				this.passto = false;
 			}
 		},
+		///选择转交人信息
 		choicePeople: function(index) {
 			if (this.checkedindex != null) {
 				if (this.checkedindex != index) {
@@ -141,13 +146,14 @@ export default {
 				this.checkedindex = index;
 			}
 		},
+		//提交转交人
 		switchpeople: function() {
 			if (this.checkedindex != null) {
 				this.passto = false;
 				this.SETLOAD(true);
 				this.$api.server.deliverToOtherServer(this.Listdata.userId, this.passtodata[this.checkedindex].kefuId).then(res => {
 					if (res.status == 10000) {
-						this.$nextTick(()=>{
+						this.$nextTick(() => {
 							this.SETLOAD(false);
 						})
 						this.checkedindex = null;
@@ -155,9 +161,9 @@ export default {
 						this.$message.success(res.message);
 					} else {
 						this.SETLOAD(false);
-						if(res.status == 30000){
+						if (res.status == 30000) {
 							this.$message.error(res.message);
-						}else{
+						} else {
 							this.$message.error('未能接收到规定的Josn返回格式!');
 						}
 					}
@@ -166,6 +172,7 @@ export default {
 				this.$message.warning('请选择的转交人员!');
 			}
 		},
+		//打开聊天记录弹窗
 		showchartDetailchange(item) {
 			this.showchartDetail = true;
 			this.$nextTick(function() {
@@ -173,9 +180,11 @@ export default {
 			})
 
 		},
+		//关闭聊天记录弹窗
 		colseshowchartDetail: function() {
 			this.showchartDetail = false;
 		},
+		//修改备注名方法
 		revisedname: function() {
 			this.$prompt('请输入备注名', '提示', {
 				inputValue: this.userMsg.remark,
@@ -195,9 +204,9 @@ export default {
 						this.$message.success(res.message);
 					} else {
 						this.SETLOAD(false);
-						if(res.status == 30000){
+						if (res.status == 30000) {
 							this.$message.error(res.message);
-						}else{
+						} else {
 							this.$message.error('未能接收到规定的Josn返回格式!');
 						}
 					}
@@ -206,14 +215,16 @@ export default {
 
 			});
 		},
+		//显示工单方法
 		showbillfun: function(bloean) {
 			this.showbill = bloean;
 			if (this.showbill) {
 				this.getuserbill();
-			}else{
+			} else {
 				this.ifbuildbill = true;
 			}
 		},
+		//查询工单列表
 		fifbuildbillfun: function() {
 			if (this.ifbuildbill) {
 				this.initializebillform();
@@ -226,9 +237,9 @@ export default {
 							this.woTypes = res.data.woTypes;
 							this.billdataloading = false;
 						} else {
-							if(res.status == 30000){
+							if (res.status == 30000) {
 								this.$message.error(res.message);
-							}else{
+							} else {
 								this.$message.error('未能接收到规定的Josn返回格式!');
 							}
 							this.billdataloading = false;
@@ -242,7 +253,7 @@ export default {
 		},
 		deptStaffInfovaluefun: function(e) {
 			var _that = this;
-			this.deptStaffDtosvlaue ='';
+			this.deptStaffDtosvlaue = '';
 			this.deptStaffInfo.forEach(function(value, index) {
 				if (value.deptCode == e) {
 					_that.deptStaffDtos = value.deptStaffDtos;
@@ -251,6 +262,7 @@ export default {
 
 			})
 		},
+		//提交创建工单的信息
 		submitformdata: function() {
 			if (this.deptStaffInfovalue == '' || this.deptStaffDtosvlaue == '' || this.woTypesvalue == '' || this.billtextarea ==
 				'' || this.titleValue == '' || this.radio == '') {
@@ -259,18 +271,18 @@ export default {
 			}
 			this.billdataloading = true;
 			this.$api.server.addWorkOrder(this.woTypesvalue, this.radio, this.titleValue, this.billtextarea, this.Listdata.userId,
-				this.deptStaffDtosvlaue,this.Listdata.chatId).then(res => {
-				if (res.status == 10000) {			
-					this.billlistdata=null;
-					this.getuserbill();								
+				this.deptStaffDtosvlaue, this.Listdata.chatId).then(res => {
+				if (res.status == 10000) {
+					this.billlistdata = null;
+					this.getuserbill();
 					this.initializebillform();
 					this.ifbuildbill = true;
 					this.$message.success(res.message);
 				} else {
 					this.billdataloading = false;
-					if(res.status == 30000){
+					if (res.status == 30000) {
 						this.$message.error(res.message);
-					}else{
+					} else {
 						this.$message.error('未能接收到规定的Josn返回格式!');
 					}
 				}
@@ -296,26 +308,26 @@ export default {
 			this.ifbuildbill = true;
 		},
 		getuserbill: function() {
-				this.billdataloading = true;
-				this.$api.server.getAdminWOList(this.Listdata.userId).then(res => {
-					if (res.status == 10000) {
-						this.billlistdata = res.data;
-						this.$nextTick(() => {
-							this.billdataloading = false;
-						 });
-					} else {
+			this.billdataloading = true;
+			this.$api.server.getAdminWOList(this.Listdata.userId).then(res => {
+				if (res.status == 10000) {
+					this.billlistdata = res.data;
+					this.$nextTick(() => {
 						this.billdataloading = false;
-						if(res.status == 30000){
-							this.$message.error(res.message);
-						}else{
-							this.$message.error('未能接收到规定的Josn返回格式!');
-						}
+					});
+				} else {
+					this.billdataloading = false;
+					if (res.status == 30000) {
+						this.$message.error(res.message);
+					} else {
+						this.$message.error('未能接收到规定的Josn返回格式!');
 					}
-				})
+				}
+			})
 
 		},
-		gotonbilldeatil:function(code,userId){
-			this.$parent.showbillDetail(code,userId);
+		gotonbilldeatil: function(code, userId) {
+			this.$parent.showbillDetail(code, userId);
 		}
 
 	},

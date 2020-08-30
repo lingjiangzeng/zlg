@@ -414,6 +414,7 @@ export const publicmethod = {
 		} else {
 			todaytime = time;
 		}
+		
 		newstimearry.push(todaytime.split(' ')[0].split('-')[0]) //年
 		newstimearry.push(todaytime.split(' ')[0].split('-')[1]) //月
 		newstimearry.push(todaytime.split(' ')[0].split('-')[2]) //日
@@ -532,3 +533,18 @@ export const publicmethod = {
 		}
 	},
 }
+// 压缩图片
+ // filecompression:function(file,_that){
+	//   let reader = new FileReader();
+	// 	  reader.readAsDataURL(file);
+	// 		reader.onload =function(ev){
+	// 			image.src = ev.target.result;
+	// 			image.onload = function (){
+	// 				let canvas = document.createElement('canvas');
+	// 				let ctx = canvas.getContext('2d');
+	// 				ctx.drawImage(this,0,0,imgWidth,imgheigh0);
+	// 				canvas.toDataURL(file,type,0.9);
+	// 			}
+				
+	// 		}
+ // }

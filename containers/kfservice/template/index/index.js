@@ -1,9 +1,16 @@
 import hearder from '../../components/hearder/hearder.vue';
 import silder from '../../components/silder/silder.vue';
 import api from 'api/base';
-import {imServerStore} from '../../store/imServerStore.js';
-import {publicmethod} from '../../utils/publicmethod.js';
-import {mapGetters,mapMutations,} from 'vuex';
+import {
+	imServerStore
+} from '../../store/imServerStore.js';
+import {
+	publicmethod
+} from '../../utils/publicmethod.js';
+import {
+	mapGetters,
+	mapMutations,
+} from 'vuex';
 export default {
 	components: {
 		hearder,
@@ -17,25 +24,27 @@ export default {
 			websockitsetInterval: null,
 			overtimeInterval: null,
 			myNotification: null,
-			billNotification:null,
-			position:{ top:'80px',   right:'24px',},
-			callLitteWindowmove:false,
-			offsetX:0,
-			offsetY:0,
-			internetspeed:'0',
-			windowifonfocus:false,
-			logobase:require('../../assets/Notificationlogo.png'),
-			websokitloading:true,
+			billNotification: null,
+			position: {
+				top: '80px',
+				right: '24px',
+			},
+			callLitteWindowmove: false,
+			offsetX: 0,
+			offsetY: 0,
+			internetspeed: '0',
+			windowifonfocus: false,
+			logobase: require('../../assets/Notificationlogo.png'),
+			websokitloading: true,
 		}
 	},
-	created() {
-	},
+	created() {},
 	mounted() {
 		publicmethod.backlogin(this) ? this.init() : null;
-		
+
 	},
 	computed: {
-		...mapGetters('serverModule', ['someObj', 'websockitsendmsg', 'userInfo','callwindow','windowsize','allloading'])
+		...mapGetters('serverModule', ['someObj', 'websockitsendmsg', 'userInfo', 'callwindow', 'windowsize', 'allloading'])
 	},
 	methods: {
 		...mapMutations('serverModule', {
@@ -43,12 +52,12 @@ export default {
 			SETZUINNEWS: 'SETZUINNEWS',
 			SETCALLTIME: 'SETCALLTIME',
 			COSLESETCALLTIME: 'COSLESETCALLTIME',
-			SETWINDOWSIZE:'SETWINDOWSIZE',
+			SETWINDOWSIZE: 'SETWINDOWSIZE',
 			SETPATH: 'SETPATH',
-			SETLOAD:'SETLOAD',
-			SETOPENSUERCHART:'SETOPENSUERCHART',
+			SETLOAD: 'SETLOAD',
+			SETOPENSUERCHART: 'SETOPENSUERCHART',
 		}),
-		init:function(){
+		init: function() {
 			this.linkwebsockit();
 			this.listenwindow();
 			var _that = this;
@@ -69,10 +78,10 @@ export default {
 				_that.disposewebsockitmsg(msg);
 			};
 			this.websockitobj.onerror = function(e) {
-				window.clearInterval(_that.websockitsetInterval);	
-				if (_that.ifwebsockitobj) {			
-					_that.ifwebsockitobj = false;				
-					_that.linkwebsockit();					
+				window.clearInterval(_that.websockitsetInterval);
+				if (_that.ifwebsockitobj) {
+					_that.ifwebsockitobj = false;
+					_that.linkwebsockit();
 					_that.overtime();
 
 				}
@@ -93,11 +102,11 @@ export default {
 		overtime: function() {
 			this.overtimeInterval = setTimeout(() => {
 				this.websockitobj.close();
-				setTimeout(()=>{
+				setTimeout(() => {
 					this.linkwebsockit();
 					this.ifwebsockitobj = true;
-				},2000)
-			},1000*60)
+				}, 2000)
+			}, 1000 * 60)
 		},
 		disposewebsockitmsg: function(msg) {
 			if (msg.data == 'success') {
@@ -107,37 +116,36 @@ export default {
 					this.websockitobj.send(JSON.stringify({
 						type: 'heart',
 					}));
-				},1000*60*10);
+				}, 1000 * 60 * 10);
 				this.websokitloading = false;
 			} else {
 				const data = JSON.parse(msg.data);
 				if (data.type == 'pc') {
 					this.SETZUINNEWS(data);
-					if (data.wsType == 1) {
-					} else if (data.wsType == 2) {
+					if (data.wsType == 1) {} else if (data.wsType == 2) {
 						imServerStore.dispatch('updataliststatus', data);
 					} else if (data.wsType == 3) {
 						let timehandle = data;
 						timehandle.sendTime = publicmethod.chartlsithandle(timehandle.sendTime);
 						imServerStore.dispatch('addchartList', timehandle);
-						if(timehandle.senderType ==1){
+						if (timehandle.senderType == 1) {
 							this.sendwindowmsg(timehandle);
 						}
-					}else if(data.wsType == 6){
+					} else if (data.wsType == 6) {
 						data.callTime = data.time;
 						data.ifshow = 1;
 						data.name = '';
 						data.headImg = '';
 						this.SETCALLTIME(data);
-					}else if(data.wsType == 7){
+					} else if (data.wsType == 7) {
 						data.callTime = data.time;
 						data.ifshow = 2;
 						data.chCallin = '';
 						this.SETCALLTIME(data);
-						
-					}else if(data.wsType == 8){
+
+					} else if (data.wsType == 8) {
 						this.COSLESETCALLTIME();
-					}else if(data.wsType == 9){
+					} else if (data.wsType == 9) {
 						this.showbillwindowmsg(data);
 					}
 				}
@@ -146,92 +154,92 @@ export default {
 		sendwindowmsg: function(data) {
 			let _that = this;
 			if (this.windowifonfocus) {
-				document.title="您有新的消息";
+				document.title = "您有新的消息";
 				this.myNotification != null ? this.myNotification.close() : null;
 				let msgcontent = data.contentType == 2 ? '[图片]' : data.content;
 				this.myNotification = new window.Notification(data.senderName, {
-					body: msgcontent, 
+					body: msgcontent,
 					icon: data.senderImg,
 					requireInteraction: true,
-					tag:'msg',
+					tag: 'msg',
 				});
 				this.myNotification.onclick = function() {
 					_that.SETOPENSUERCHART(data.userId);
 					_that.SETPATH('chart');
 					window.focus();
-					
+
 				}
 			}
 		},
-		showbillwindowmsg:function(data){
+		showbillwindowmsg: function(data) {
 			let _that = this;
-				this.billNotification != null ? this.billNotification.close() : null;
-				this.billNotification = new window.Notification('您有工单需要处理', {
-					body: data.msg, 
-					icon:_that.logobase,
-					tag:'bill',
-					requireInteraction: true,
-				});
-				this.billNotification.onclick = function() {
-					_that.SETPATH('Idealwith');
-					window.focus();
-				}
+			this.billNotification != null ? this.billNotification.close() : null;
+			this.billNotification = new window.Notification('您有工单需要处理', {
+				body: data.msg,
+				icon: _that.logobase,
+				tag: 'bill',
+				requireInteraction: true,
+			});
+			this.billNotification.onclick = function() {
+				_that.SETPATH('Idealwith');
+				window.focus();
+			}
 		},
-		callLitteWindowdown:function(e){
+		callLitteWindowdown: function(e) {
 			e = window.event || e;
 			e.preventDefault();
-			this.callLitteWindowmove =true;
+			this.callLitteWindowmove = true;
 			this.offsetX = e.offsetX;
 			this.offsetY = e.offsetY;
 		},
-		callLitteWindowup:function(e){
+		callLitteWindowup: function(e) {
 			e.preventDefault();
 			e = window.event || e;
-			this.callLitteWindowmove =false;
+			this.callLitteWindowmove = false;
 		},
-		callLitteWindowleave:function(e){
+		callLitteWindowleave: function(e) {
 			e.preventDefault();
 			e = window.event || e;
-			this.callLitteWindowmove =false;
-			
+			this.callLitteWindowmove = false;
+
 		},
-		movefun:function(e){
+		movefun: function(e) {
 			e.preventDefault();
 			e = window.event || e;
-			if(this.callLitteWindowmove){
-				this.position.top= (e.clientY - this.offsetY)+ 'px';
+			if (this.callLitteWindowmove) {
+				this.position.top = (e.clientY - this.offsetY) + 'px';
 				this.position.right = (window.innerWidth - e.clientX - (424 - this.offsetX)) + 'px';
 			}
-			
+
 		},
-		listenwindow:function(){
+		listenwindow: function() {
 			this.SETWINDOWSIZE(window.innerWidth)
-			let _that=this;
+			let _that = this;
 			let onlinemsg;
-			window.onresize=function(){
+			window.onresize = function() {
 				_that.SETWINDOWSIZE(window.innerWidth);
 			}
-			 window.addEventListener('online',function(){
-				 onlinemsg.close();
-				 _that.linkwebsockit();
+			window.addEventListener('online', function() {
+				onlinemsg.close();
+				_that.linkwebsockit();
 			});
-			window.addEventListener('offline',function(){
+			window.addEventListener('offline', function() {
 				_that.closewebsockit();
 				_that.SETLOAD(true);
-				 onlinemsg = _that.$message({
+				onlinemsg = _that.$message({
 					message: '网络异常,请检查网络！',
 					type: 'error',
-					duration:0,
+					duration: 0,
 				});
 			});
-			window.onfocus = function() { 
-			  _that.windowifonfocus = false;
-			}; 
-			window.onblur = function() { 
-			  _that.windowifonfocus = true;
+			window.onfocus = function() {
+				_that.windowifonfocus = false;
+			};
+			window.onblur = function() {
+				_that.windowifonfocus = true;
 			};
 		},
-		gocallenter:function(e){
+		gocallenter: function(e) {
 			e.preventDefault();
 			this.SETPATH('callenter');
 		}
@@ -239,23 +247,23 @@ export default {
 	watch: {
 		$route: {
 			handler: function(val, oldVal) {
-				if(val.fullPath == '/index/chart'){
+				if (val.fullPath == '/index/chart') {
 					this.myNotification != null ? this.myNotification.close() : null;
-				}else if(val.fullPath == '/index/leaveword'){
-					
-				}else{
+				} else if (val.fullPath == '/index/leaveword') {
+
+				} else {
 					this.$api.server.deleteKFWindowlocationRedis().then(res => {
-						if(res.status == 10000){
-							
-						}else{
-							if(res.status == 30000){
+						if (res.status == 10000) {
+
+						} else {
+							if (res.status == 30000) {
 								this.$message.error(res.message);
-							}else{
+							} else {
 								this.$message.error('未能接收到规定的Josn返回格式!');
 							}
 						}
 					});
-					if( val.fullPath == '/index/Idealwith'){
+					if (val.fullPath == '/index/Idealwith') {
 						this.billNotification != null ? this.billNotification.close() : null;
 					}
 				}
@@ -263,10 +271,10 @@ export default {
 			deep: true
 		},
 		websockitsendmsg: function(news, olds) {
-			if(news != null){
+			if (news != null) {
 				this.websockitobj.send(JSON.stringify(news));
 			}
-			
+
 		}
 	}
 }
