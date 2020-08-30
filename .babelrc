@@ -27,5 +27,4 @@
     ],
 	  ["import",{"libraryName":"vant","style":true}]
   ],
-  "ignore": ['./containers/BYVAS/assets/mui/mui.min.js']
 }

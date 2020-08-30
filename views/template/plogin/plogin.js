@@ -40,7 +40,7 @@ export default {
 				if (window.location.href.split('?')[1]) {
 					urlS = '?' + window.location.href.split('?')[1];
 				}
-				let urlStr = window.location.origin + '/h5/kfservice/plogin' + urlS;
+				let urlStr = window.location.origin + '/views/plogin' + urlS;
 				let redirect_uri = encodeURIComponent(urlStr);
 				let url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + appid + '&redirect_uri=' + redirect_uri + '&response_type=code&scope=snsapi_base&state=STATE';
 				window.location.href = url;

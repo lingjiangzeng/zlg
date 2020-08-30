@@ -38,12 +38,12 @@ module.exports = {
 
   build: {
     // Template for index.html
-    index: path.resolve(__dirname, '../../../dist/kfservice/index.html'),
+    index: path.resolve(__dirname, '../../dist/index.html'),
     // Paths
-    assetsRoot: path.resolve(__dirname, '../../../dist/kfservice'),
+    assetsRoot: path.resolve(__dirname, '../../dist'),
     assetsSubDirectory: 'static',
     //指定输出时的公共路径 -----------------------------------
-    assetsPublicPath: '/h5/kfservice/',
+    assetsPublicPath: './',
 
     /**
      * Source Maps

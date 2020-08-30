@@ -5,8 +5,8 @@
   "author": "singo <singowu@sina.cn>",
   "private": true,
   "scripts": {
-    "startkfservice": "webpack-dev-server --inline --progress  --config  ./containers/kfservice/build/webpack.dev.conf.js",
-    "buildkfservice": "node ./containers/kfservice/build/build.js"
+    "start": "webpack-dev-server --inline --progress  --config  ./views/build/webpack.dev.conf.js",
+    "build": "node ./views/build/build.js"
   },
   "dependencies": {
     "element-ui": "^2.11.1",

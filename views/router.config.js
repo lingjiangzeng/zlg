@@ -29,10 +29,9 @@ const callenter = () =>
 const callserverRecord = () =>
 				import('./template/callserverRecord/callserverRecord.vue'); //呼叫记录
 //基础路径
-const basepath = '/h5/kfservice/';
+const basepath = '/';
 const router = new Router({
 	mode: 'history',
-	base: basepath,
 	//默认切换路由的时候滚动都在最顶部
 	scrollBehavior(to, from, savedPosition) {
 		return {
@@ -45,15 +44,11 @@ const router = new Router({
 		//错误地址
 		{
 			path: '*',
-			redirect: '/login'
+			redirect: '/login',
+      component: login
 		},
-		//首页重定向
 		{
 			path: '/',
-			redirect: '/login'
-		},
-		{
-			path: '/login',
 			name: 'login',
 			component: login
 		},
@@ -119,13 +114,5 @@ const router = new Router({
 			component: plogin
 		},
 	]
-});
-
-router.beforeEach((to, from, next) => {
-	const trackUrl = window.location.origin + basepath + to.path;
-	if (typeof _czc != "undefined") {
-		_czc.push(["_trackPageview", trackUrl]);
-	}
-	next();
 });
 export default router
