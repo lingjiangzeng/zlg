@@ -43,7 +43,7 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../../dist'),
     assetsSubDirectory: 'static',
     //指定输出时的公共路径 -----------------------------------
-    assetsPublicPath: './',
+    assetsPublicPath: '/',
 
     /**
      * Source Maps

@@ -39,10 +39,10 @@ const webpackConfig = {
     }
   },
   plugins: [
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery"
-    })
+    // new webpack.ProvidePlugin({
+    //   $: "jquery",
+    //   jQuery: "jquery"
+    // })
   ],
   module: {
     rules: [{
@@ -82,6 +82,15 @@ const webpackConfig = {
         options: {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+        }
+      },
+      {
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        include: [resolve('@views')],
+        options: {
+          formatter: require('eslint-friendly-formatter')
         }
       }
     ]

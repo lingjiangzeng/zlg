@@ -17,7 +17,7 @@ const server = {
 	mbbliegetMsgHis(userId) {
 	    return axios.post(`${base.test}chat/queryUserChatRecordByChatId`, {
 	        userId: userId,
-	        kefuId: sessionStorage.getItem("adminId"),
+	        kefuId: JSON.parse(sessionStorage.getItem("vuex")).serverModule.userInfo.id,
 	    });
 	},
     /* 获取列表数据 */
@@ -158,7 +158,7 @@ const server = {
 	moblieuploadpictures(base64,userId,type) {
 	    return axios.post(`${base.test}file/uploadImgForWX`,{
 			userId: userId,
-			kefuId:sessionStorage.getItem("adminId"),
+			kefuId:JSON.parse(sessionStorage.getItem("vuex")).serverModule.userInfo.id,
 			type:type,
 			base64:base64,
 			

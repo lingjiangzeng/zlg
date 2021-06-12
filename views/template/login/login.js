@@ -44,23 +44,40 @@ export default {
 			}
 			this.loading = '登录中';
 			this.$api.server.login(this.form.name, this.form.password, businessIds.join(',')).then(res => {
-				if (res.status == 10000) {
-					this.loading = '';
-					res.data.onlinestatus = 1;
-					this.SETUSERINFO(res.data);
-					this.SETBUSINESSTYPE(this.businesstype);
-					this.$router.replace({
-						name: 'chart'
-					});
-				} else{
-					this.loading = '';
-					if(res.status == 30000){
-						this.$message.error(res.message);
-					}else{
-						this.$message.error('未能接收到规定的Josn返回格式!');
-					}
+        let data= {
+          id: 1,
+          imgUrl:'',
+          userName:'哈药六厂',
+          status:1,
+          onlinestatus: 1,
+          openId:'',
+          isLeaveMsgRole: 2,
+          isKFLeader: 1
+        }
+        this.loading = '';
+        data.onlinestatus = 1;
+        this.SETUSERINFO(data);
+        this.SETBUSINESSTYPE(this.businesstype);
+        this.$router.replace({
+        	name: 'chart'
+        });
+				// if (res.status == 10000) {
+				// 	this.loading = '';
+				// 	res.data.onlinestatus = 1;
+				// 	this.SETUSERINFO(res.data);
+				// 	this.SETBUSINESSTYPE(this.businesstype);
+				// 	this.$router.replace({
+				// 		name: 'chart'
+				// 	});
+				// } else{
+				// 	this.loading = '';
+				// 	if(res.status == 30000){
+				// 		this.$message.error(res.message);
+				// 	}else{
+				// 		this.$message.error('未能接收到规定的Josn返回格式!');
+				// 	}
 					
-				}
+				// }
 			})
 
 		},
